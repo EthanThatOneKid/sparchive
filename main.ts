@@ -80,7 +80,10 @@ async function download(
 
   // Find all the links in the HTML and download them recursively.
   const hrefs: string[] = await page.evaluate(() => {
-    return Array.from(document.querySelectorAll("a")).map((a) => a.href);
+    return Array.from(
+      document.querySelectorAll("[href]"),
+      (element) => element.getAttribute("href"),
+    ).filter((href) => href !== null);
   });
 
   // Download all the links that have not been visited yet.
