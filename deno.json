@@ -1,0 +1,9 @@
+{
+  "lock": false,
+  "tasks": {
+    "dev": "deno run -A main.ts"
+  },
+  "imports": {
+    "@astral/astral": "jsr:@astral/astral@^0.4.9"
+  }
+}
