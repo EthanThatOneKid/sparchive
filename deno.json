@@ -4,7 +4,8 @@
   "exports": "./main.ts",
   "lock": false,
   "tasks": {
-    "dev": "deno run -A main.ts --entrypoint=http://localhost:5126/"
+    "dev": "deno run -A main.ts --entrypoint=http://localhost:5126/",
+    "outdated": "deno outdated --latest --update"
   },
   "imports": {
     "@astral/astral": "jsr:@astral/astral@^0.4.9",
