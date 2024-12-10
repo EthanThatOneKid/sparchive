@@ -1,4 +1,7 @@
 {
+  "name": "@etok/sparchive",
+  "version": "0.0.1",
+  "exports": "./main.ts",
   "lock": false,
   "tasks": {
     "dev": "deno run -A main.ts"
