@@ -4,6 +4,9 @@
     "dev": "deno run -A main.ts"
   },
   "imports": {
-    "@astral/astral": "jsr:@astral/astral@^0.4.9"
+    "@astral/astral": "jsr:@astral/astral@^0.4.9",
+    "@std/encoding": "jsr:@std/encoding@^1.0.5",
+    "@std/fs": "jsr:@std/fs@^1.0.6",
+    "@std/path": "jsr:@std/path@^1.0.8"
   }
 }
