@@ -16,12 +16,29 @@ async function download(
 ) {
   const bindings = page.unsafelyGetCelestialBindings();
   await bindings.Network.enable({});
+
+  // TODO: Store media type and content encoding.
+  const requests = new Map<string, string>();
   bindings.addEventListener("Network.responseReceived", async (event) => {
-    const id = (Math.floor(Math.random() * 100)).toString().padStart(4, "0");
-    await Deno.writeTextFile(
-      `${id}_response.json`,
-      JSON.stringify(event.detail, null, 2),
-    );
+    if (!event.detail.response.protocol!.startsWith("http")) {
+      return;
+    }
+
+    const eventURL = new URL(event.detail.response.url);
+    if (eventURL.origin !== url.origin) {
+      return;
+    }
+
+    requests.set(eventURL.pathname, event.detail.requestId);
   });
-  await page.goto(url.toString(), { waitUntil: "networkidle0" });
+
+  await page.goto(
+    url.toString(),
+    { waitUntil: "load" },
+  );
+
+  for (const [pathname, _id] of requests) {
+    // const response = await bindings.Network.getResponseBody({ requestId: id });
+    console.log(pathname);
+  }
 }
