@@ -8,5 +8,8 @@
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
     "@std/fs": "jsr:@std/fs@^1.0.6",
     "@std/path": "jsr:@std/path@^1.0.8"
+  },
+  "compilerOptions": {
+    "lib": ["deno.ns", "dom"]
   }
 }

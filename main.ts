@@ -26,8 +26,6 @@ async function download(
   url: URL,
   visited = new Set<string>(),
 ) {
-  console.info(`### Downloading: ${url} to ${"?"}`);
-
   const bindings = page.unsafelyGetCelestialBindings();
   await bindings.Network.enable({});
 
@@ -51,8 +49,6 @@ async function download(
       return;
     }
 
-    console.info(`Identified: ${eventURL} as ${filename}`);
-    visited.add(filename);
     requests.set(filename, event.detail.requestId);
   });
 
@@ -69,6 +65,7 @@ async function download(
       : new TextEncoder().encode(response.body);
     await file.write(data);
     file.close();
+    visited.add(filename);
   }
 
   // Find all the links in the HTML and download them recursively.
@@ -79,7 +76,6 @@ async function download(
   // Download all the links that have not been visited yet.
   for (const href of hrefs) {
     if (!URL.canParse(href)) {
-      console.warn(`Invalid URL: ${href}`);
       continue;
     }
 
