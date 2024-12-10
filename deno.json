@@ -1,13 +1,14 @@
 {
   "name": "@etok/sparchive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": "./main.ts",
   "lock": false,
   "tasks": {
-    "dev": "deno run -A main.ts"
+    "dev": "deno run -A main.ts --entrypoint=http://localhost:5126/"
   },
   "imports": {
     "@astral/astral": "jsr:@astral/astral@^0.4.9",
+    "@std/cli": "jsr:@std/cli@^1.0.8",
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
     "@std/fs": "jsr:@std/fs@^1.0.6",
     "@std/path": "jsr:@std/path@^1.0.8"

@@ -1,29 +1,39 @@
+import { parseArgs } from "@std/cli/parse-args";
 import { decodeBase64 } from "@std/encoding";
 import { exists } from "@std/fs";
 import { dirname } from "@std/path/dirname";
 import type { Page } from "@astral/astral";
 import { launch } from "@astral/astral";
 
-// https://jsr.io/@std/cli/doc/~/parseArgs
-
-const outputDirectory = "build";
-const entrypointURL = new URL("http://localhost:5126/");
-
 if (import.meta.main) {
+  const parsedArgs = parseArgs(Deno.args, {
+    string: ["output", "entrypoint"],
+    default: { output: "build" },
+  });
+
   const browser = await launch();
   const page = await browser.newPage();
 
-  if (await exists(outputDirectory)) {
-    await Deno.remove(outputDirectory, { recursive: true });
+  if (await exists(parsedArgs.output)) {
+    await Deno.remove(parsedArgs.output, { recursive: true });
   }
 
-  await download(page, entrypointURL);
+  if (parsedArgs.entrypoint === undefined) {
+    throw new Error("Missing entrypoint");
+  }
+
+  await download(
+    page,
+    new URL(parsedArgs.entrypoint),
+    parsedArgs.output,
+  );
   await browser.close();
 }
 
 async function download(
   page: Page,
   url: URL,
+  output: string,
   visited = new Set<string>(),
 ) {
   const bindings = page.unsafelyGetCelestialBindings();
@@ -40,7 +50,7 @@ async function download(
       return;
     }
 
-    const filename = `${outputDirectory}${
+    const filename = `${output}${
       event.detail.response.mimeType === "text/html"
         ? resolveIndex(eventURL.pathname)
         : eventURL.pathname
@@ -84,12 +94,12 @@ async function download(
       continue;
     }
 
-    const filename = `${outputDirectory}${resolveIndex(hrefURL.pathname)}`;
+    const filename = `${output}${resolveIndex(hrefURL.pathname)}`;
     if (visited.has(filename)) {
       continue;
     }
 
-    await download(page, hrefURL, visited);
+    await download(page, hrefURL, output, visited);
   }
 }
 
