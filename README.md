@@ -1,12 +1,16 @@
-# sparchive
+# Sparchive
 
-(SPA)rchive headlessly archive the Web.
+Sparchive the Web!
 
 ## Usage
 
 ```sh
-deno -A jsr:@etok/sparchive --entrypoint=<url>
+deno -A jsr:@etok/sparchive --entrypoint=<url> --output=<directory>
 ```
+
+## Example
+
+Coming soon!
 
 ## Similar projects
 
