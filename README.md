@@ -8,9 +8,10 @@ Sparchive the Web!
 deno -A jsr:@etok/sparchive --entrypoint=<url> --output=<directory>
 ```
 
-## Example
+## Examples
 
-Coming soon!
+- Used in a GitHub workflow that deploys a static .NET site to Vercel:
+  <https://github.com/Minseung2006/Nathans-Portfolio/pull/3>
 
 ## Similar projects
 
