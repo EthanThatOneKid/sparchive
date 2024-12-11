@@ -102,6 +102,7 @@ async function download(
       continue;
     }
 
+    // TODO: Handle case where the filename is the same as the current page.
     await download(page, hrefURL, output, visited);
   }
 }

@@ -4,7 +4,7 @@
   "exports": "./main.ts",
   "lock": false,
   "tasks": {
-    "dev": "deno run -A main.ts --entrypoint=http://localhost:5126/",
+    "dev": "deno -A main.ts --entrypoint=http://www.gregorydavidson.com/",
     "outdated": "deno outdated --latest --update"
   },
   "imports": {
