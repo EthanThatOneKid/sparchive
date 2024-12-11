@@ -1,6 +1,6 @@
 {
   "name": "@etok/sparchive",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "exports": "./main.ts",
   "lock": false,
   "tasks": {
