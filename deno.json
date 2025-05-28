@@ -8,7 +8,7 @@
     "outdated": "deno outdated --latest --update"
   },
   "imports": {
-    "@astral/astral": "jsr:@astral/astral@^0.4.9",
+    "@astral/astral": "jsr:@astral/astral@^0.5.3",
     "@std/cli": "jsr:@std/cli@^1.0.8",
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
     "@std/fs": "jsr:@std/fs@^1.0.6",
