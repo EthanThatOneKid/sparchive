@@ -11,7 +11,13 @@ if (import.meta.main) {
     default: { output: "build" },
   });
 
-  const browser = await launch();
+  const browser = await launch({
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
+  });
   const page = await browser.newPage();
 
   if (await exists(parsedArgs.output)) {
@@ -22,11 +28,7 @@ if (import.meta.main) {
     throw new Error("Missing entrypoint");
   }
 
-  await download(
-    page,
-    new URL(parsedArgs.entrypoint),
-    parsedArgs.output,
-  );
+  await download(page, new URL(parsedArgs.entrypoint), parsedArgs.output);
   await browser.close();
 }
 
